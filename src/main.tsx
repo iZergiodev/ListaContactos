@@ -7,10 +7,6 @@ import { AddContact } from "./views/AddContact";
 import { BrowserRouter } from "react-router-dom";
 import { ContactProvider } from "./store/contactContext";
 
-
-
-
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ContactProvider>
@@ -20,6 +16,6 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/add-contact" element={<AddContact />} />
         </Routes>
       </BrowserRouter>
-      </ContactProvider>
+    </ContactProvider>
   </StrictMode>
 );

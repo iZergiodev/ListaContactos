@@ -2,7 +2,6 @@ import { useState, ReactNode } from "react";
 import { Contact, contactContext } from "./context";
 
 export const ContactProvider = ({ children }: { children: ReactNode }) => {
-  
   const [contactList, setContactList] = useState<Contact[]>([]);
 
   const handleContact = {
@@ -25,14 +24,23 @@ export const ContactProvider = ({ children }: { children: ReactNode }) => {
           "https://playground.4geeks.com/contact/agendas/sergio"
         );
         const { contacts } = await resp.json();
+        setContactList(contacts);
         return contacts;
-
       } catch (error) {
         console.log(error);
       }
     },
 
-    delete: async () => {},
+    delete: async (id: number) => {
+      try {
+        await fetch(
+          `https://playground.4geeks.com/contact/agendas/sergio/contacts/${id}`,
+          { method: "DELETE" }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    },
   };
 
   return (
