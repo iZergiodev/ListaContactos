@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { contactContext } from "../store/context";
+import { useNavigate } from "react-router-dom";
 
 export const ContactCard = ({ id, name, phone, email, address }) => {
   const { handleContact } = useContext(contactContext);
@@ -8,6 +9,17 @@ export const ContactCard = ({ id, name, phone, email, address }) => {
     await handleContact.delete(id);
     await handleContact.get();
   };
+
+  const navigate = useNavigate();
+
+  const handleUpdate = () => {
+
+    handleContact.idToUpdate = id;
+
+    navigate('/update-contact')
+  
+  }
+
 
   return (
     <div className="border p-5 w-[50%] flex flex-col m-auto items-center gap-2 mt-5 rounded-lg bg-gray-100">
@@ -19,7 +31,7 @@ export const ContactCard = ({ id, name, phone, email, address }) => {
       <h4>{address}</h4>
       <div className="mx-auto">
         <button
-          type="button"
+          onClick={handleUpdate}
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
         >
           Actualizar

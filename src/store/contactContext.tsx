@@ -41,6 +41,23 @@ export const ContactProvider = ({ children }: { children: ReactNode }) => {
         console.log(error);
       }
     },
+
+    update: async (id: number, updatedContact) => {
+      try {
+        console.log(id, updatedContact)
+        await fetch(
+          `https://playground.4geeks.com/contact/agendas/sergio/contacts/${id}`,
+          {
+            method: "PUT",
+            body: JSON.stringify(updatedContact),
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    idToUpdate: null,
   };
 
   return (

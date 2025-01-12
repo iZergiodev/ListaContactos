@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { contactContext } from "../store/context";
 import { useNavigate } from "react-router-dom";
 
-export const AddContact = () => {
+export const UpdateContact = () => {
   const { handleContact } = useContext(contactContext);
 
   const navigate = useNavigate();
@@ -17,9 +17,15 @@ export const AddContact = () => {
       address: e.target.address.value,
     };
 
-    await handleContact.post(newContact);
+    console.log(handleContact.idToUpdate, newContact)
+    const id = await handleContact.idToUpdate
+
+    await handleContact.update(id , newContact);
     navigate("/");
   };
+
+
+
 
   return (
     <form
